@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .projectSection{
+        @apply mb-10 w-full relative m-0 flex flex-col lg:block lg:h-full lg:w-1/2 lg:fixed lg:left-1/2;
+    }
+    .projectContainer{
+        @apply w-full h-[400px] max-h-[75vw] mt-7 relative overflow-y-hidden lg:overflow-y-auto lg:h-full lg:absolute lg:top-0 flex pl-10 lg:block lg:ml-0;
+    }
+    
+    .projectElem{
+        @apply w-3/4 mr-[20%] lg:mr-0 lg:h-full lg:absolute lg:w-full flex justify-center items-center;
+    }
+    .projectFig{
+        @apply max-w-[400px] max-h-full;
+    }
+    .projectFig img{
+        @apply rounded-3xl drop-shadow-lg h-[10%] max-h-[300px];
+    }
+    .projectFig figcaption{
+        @apply mt-4 lg:mt-8 text-3xl font-light;
+    }
+
+    // .projectFig img{
+    //     @apply rounded-3xl drop-shadow-lg h-[10%] max-h-[300px] lg:max-w-[60vw] w-full; max-w-[60vw]
+    // }
+
+    .btn{
+        @apply bg-[#C5CDD4] pl-4 pr-4  rounded-3xl p-2 inline-block;
+    }
+    .btn-alignLeft{
+        @apply mr-4 mt-4;
+    }
+
+    .clip-circle {
+        clip-path: circle(50%);
+    }
+
+    @media (max-height:1000px) and (min-width:650px) and (max-width:1000px) {
+        .headersResponsive{
+            @apply h-[420px];
+        }
+        .headersResponsive > div{
+            @apply flex items-start;
+        }
+        .headersResponsive > div img{
+            @apply mr-[20px];
+        }
+    }
+}
+
+// GENERATE CUSTOM CLASSES
+$left: 7;
+$top: 7;
+// custom left
+@for $i from 1 through $left {
+    $value: 75 * $i;
+    .cl-#{$i} { 
+        left: $value + 0%;
+    }
+}
+@media (min-width: 1024px) {
+    // custom left
+    @for $i from 1 through $left {
+        .cl-#{$i} {
+            left: 0;
+        }
+    }
+    // custom top lg
+    @for $i from 1 through $top {
+        $value: 100 * $i;
+        .lgct-#{$value} {
+            top: $value + 0%;
+        }
+    }
+}
