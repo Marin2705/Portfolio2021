@@ -21,6 +21,14 @@ let mouseScrollFlag = true;
 let mobileScroll = false;
 let hadClass = null;
 
+let touchstartY;
+let touchstartX;
+
+document.addEventListener('touchstart', (e) => {
+  touchstartY = e.touches[0].clientY;
+  touchstartX = e.touches[0].clientX;
+})
+
 function revealDetails(d = null){
   console.log('revealDetails, mobileScroll : ', mobileScroll);
   if (mobileScroll){
@@ -120,179 +128,75 @@ let dy = 0;
 let dx = 0;
 function scrollHandler(e) {
   if (!wheelFlag){
-    // console.log("blocked scroll");
-    // console.log('dy',dy);
-    // console.log('dx',dx);
-
-    // console.log("clear scroll");
     clearTimeout(_scrollTimeout);
     _scrollTimeout = setTimeout(function() {
-      // console.log("Haven't scrolled in 250ms");
       wheelFlag = true;
-      // dy = 0;
       dx = 0;
     }, 250);
   }
 
+  // calculate delta for touchscreens
+  let deltaX;
+  let deltaY;
+  if ('changedTouches' in e){
+    deltaX = touchstartX-e.changedTouches[0].clientX;
+    deltaY = touchstartY-e.changedTouches[0].clientY;
+  } else {
+    deltaX = e.deltaX;
+    deltaY = e.deltaY;
+  }
+
   // first (or after timeout) scroll :
-  if (dx == 0 
-    // && dy == 0
-    ){
-    // console.log('first scroll');
+  if (dx == 0){
     // test direction
-    if (e.deltaX > 25){
+    if (deltaX > 25){
       // go right
-      // console.log('first right');
       dx = 1;
-    } else if (e.deltaX < -25){
+    } else if (deltaX < -25){
       // go left
       dx = -1;
-    } 
-    // else if (e.deltaY > 25){
-    //   // go down
-    //   dy = 1;
-    // } else if (e.deltaY < -25){
-    //   // go up
-    //   dy = -1;
-    // } 
-    else {
+    } else {
       return;
     }
-    // console.log('scrollY',dy);
-    console.log('scrollX',dx);
+    
     wheelFlag = false;
     if (dx > 0){
-      console.log('going right');
       revealDetails(1);
     } else if (dx < 0){
-      console.log("going left");
       revealDetails(0);
     }
-    // if (dy > 0){
-    //   console.log('going down', e.deltaY);
-    //   scrollProjectHandler.d = 1;
-    //   window.dispatchEvent(scrollProjectHandler);
-    //   scrollProjectHandlerListener = true;
-    //   // scrollProject(1);
-    // } else if (dy < 0){
-    //   console.log("going up", e.deltaY);
-    //   scrollProjectHandler.d = 0;
-    //   window.dispatchEvent(scrollProjectHandler);
-    //   scrollProjectHandlerListener = true;
-    //   // scrollProject(0);
-    // }
     return;
   }
-  // if (dy == 0 && (e.deltaY > 25 || e.deltaY < 25)){
-  //   dy=1;
-  //   console.log('up/down first scroll');
-  //   // test direction
-  //   if (e.deltaY > 25){
-  //     // go down
-  //     dy = 1;
-  //   } else if (e.deltaY < -25){
-  //     // go up
-  //     dy = -1;
-  //   }
-  //   console.log('scrollY',dy);
-  //   console.log('scrollX',dx);
-  //   wheelFlag = false;
-  //   if (dy > 0){
-  //     console.log('going down', e.deltaY);
-  //     scrollProjectHandler.d = 1;
-  //     window.dispatchEvent(scrollProjectHandler);
-  //     scrollProjectHandlerListener = true;
-  //     // scrollProject(1);
-  //   } else if (dy < 0){
-  //     console.log("going up", e.deltaY);
-  //     scrollProjectHandler.d = 0;
-  //     window.dispatchEvent(scrollProjectHandler);
-  //     scrollProjectHandlerListener = true;
-  //     // scrollProject(0);
-  //   }
-  //   return;
-  // }
-
-  // do first scroll
-  // if (wheelFlag){
-  //   // console.log('scrollY',dy);
-  //   // console.log('scrollX',dx);
-  //   wheelFlag = false;
-  //   // if (dx > 0){
-  //   //   console.log('going right');
-  //   //   revealDetails(1);
-  //   // } else if (dx < 0){
-  //   //   console.log("going left");
-  //   //   revealDetails(0);
-  //   // }
-  //   if (dy > 0){
-  //     console.log('going down', e.deltaY);
-  //     scrollProjectHandler.d = 1;
-  //     window.dispatchEvent(scrollProjectHandler);
-  //     scrollProjectHandlerListener = true;
-  //     // scrollProject(1);
-  //   } else if (dy < 0){
-  //     console.log("going up", e.deltaY);
-  //     scrollProjectHandler.d = 0;
-  //     window.dispatchEvent(scrollProjectHandler);
-  //     scrollProjectHandlerListener = true;
-  //     // scrollProject(0);
-  //   }
-  //   return;
-  // }
 
   // next scrolls (detect last move) :
   if (dx > 0){
     // last move : right
-    if (e.deltaX < -25){
+    if (deltaX < -25){
       // go left
-      // console.log('go left !');
       dx = -1;
-      // dy = 0;
-      // wheelFlag = true;
       revealDetails(0);
     }
   }
   if (dx < 0){
     // last move : left
-    if (e.deltaX > 25){
+    if (deltaX > 25){
       // go right
-      // console.log('go right !');
       dx = 1;
-      // dy = 0;
-      // wheelFlag = true;
       revealDetails(1);
     }
   }
-  // if (dy > 0){
-  //   // last move : down
-  //   if (e.deltaY < -25){
-  //     // go up
-  //     dy = -1;
-  //     dx = 0;
-  //     console.log('go up !');
-  //     scrollProjectHandler.d = 0;
-  //     window.dispatchEvent(scrollProjectHandler);
-  //     scrollProjectHandlerListener = true;
-  //   }
-  // }
-  // if (dy < 0){
-  //   // last move : up
-  //   if (e.deltaY > 25){
-  //     // go down
-  //     dy = 1;
-  //     dx = 0;
-  //     console.log('go down !');
-  //     scrollProjectHandler.d = 1;
-  //     window.dispatchEvent(scrollProjectHandler);
-  //     scrollProjectHandlerListener = true;
-  //   }
-  // }
 }
 
 function projectScroll(e){
-  console.log(e);
-  if (e.deltaX > 0 || e.deltaX < 0){
+  // calculate delta for touchscreens
+  let deltaX;
+  if ('changedTouches' in e){
+    deltaX = touchstartX-e.changedTouches[0].clientX;
+  } else {
+    deltaX = e.deltaX;
+  }
+
+  if (deltaX > 0 || deltaX < 0){
     e.preventDefault();
   }
 }
@@ -300,12 +204,6 @@ function projectScroll(e){
 function preventDefault(e) {
   e.preventDefault();
   scrollHandler(e);
-  // console.log('horizontal?');
-  // if (e.deltaY > 1 || e.deltaY < -1 ){
-  //   console.log('horizontal',e.deltaX);
-  // } else {
-    
-  // }
 }
 function preventDefaultForScrollKeys(e) {
   if (keysUp[e.keyCode] || keysDown[e.keyCode] || otherKeys[e.keyCode]) {
@@ -328,8 +226,8 @@ try {
   }));
 } catch(e) {}
 
-var wheelOpt = supportsPassive ? { passive: false } : false;
-var wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
+let wheelOpt = supportsPassive ? { passive: false } : false;
+let wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
 // touchstart touchend, mouseup mouseover
 // call this to Disable
 function disableScroll() {
@@ -406,6 +304,7 @@ function Projects() {
   const [lastProject, updateLastProject] = useState(0);
   const [currentProject, updateCurrentProject] = useState(0);
   const firstRender = useRef([true, 0]);
+  let category = 'Programming';
 
   function scrollProject(d = null){
     console.log('scrollProject d',d);
@@ -436,63 +335,74 @@ function Projects() {
     }
   }
   function keyScroll(e){
-    if (keysUp[e.keyCode]) {
-      scrollProject(0);
-    } else if (keysDown[e.keyCode]){
-      scrollProject(1);
+    if (mobileScroll){
+      if (e.keyCode == 37) {
+        scrollProject(0);
+      } else if (e.keyCode == 39){
+        scrollProject(1);
+      }
+    } else {
+      if (keysUp[e.keyCode]) {
+        scrollProject(0);
+      } else if (keysDown[e.keyCode]){
+        scrollProject(1);
+      }
     }
   }
 
   function mouseScroll(e){
+    // calculate delta for touchscreens
+    let deltaX;
+    let deltaY;
+    if ('changedTouches' in e){
+      deltaX = touchstartX-e.changedTouches[0].clientX;
+      deltaY = touchstartY-e.changedTouches[0].clientY;
+    } else {
+      deltaX = e.deltaX;
+      deltaY = e.deltaY;
+    }
+
     if(mobileScroll){
       if (mouseScrollFlag){
         console.log('mouseScroll');
-        if (e.deltaX > 10){
+        if (deltaX > 10){
           // go right
-          // projectdx = 1;
-          console.log('right');
+          dx = 1;
           scrollProject(1);
           mouseScrollFlag = false;
-        } else if (e.deltaX < -10){
+        } else if (deltaX < -10){
           // go left
-          // dx = -1;
-          console.log('left');
+          dx = -1;
           scrollProject(0);
           mouseScrollFlag = false;
         }
       } else {
-        // console.log('mouseScroll');
+        console.log('mouseScroll');
   
-        // if (dy > 0){
-        //   // last move : down
-        //   if (e.deltaY < -25){
-        //     // go up
-        //     dy = -1;
-        //     console.log('up');
-        //     scrollProject(0);
-        //     mouseScrollFlag = false;
-        //   }
-        // } else if (dy < 0){
-        //   // last move : up
-        //   if (e.deltaY > 25){
-        //     // go down
-        //     dy = 1;
-        //     console.log('down');
-        //     scrollProject(1);
-        //     mouseScrollFlag = false;
-        //   }
-        // }
+        if (dx > 0){
+          if (deltaX < -25){
+            dx = -1;
+            scrollProject(0);
+            mouseScrollFlag = false;
+          }
+        } else if (dx < 0){
+          if (deltaX > 25){
+            dx = 1;
+            scrollProject(1);
+            mouseScrollFlag = false;
+          }
+        }
       }
     } else {
       if (mouseScrollFlag){
         console.log('mouseScroll');
-        if (e.deltaY > 25){
+        if (deltaY > 25){
           // go down
           dy = 1;
           console.log('down');
           scrollProject(1);
           mouseScrollFlag = false;
-        } else if (e.deltaY < -25){
+        } else if (deltaY < -25){
           // go up
           dy = -1;
           console.log('up');
@@ -504,7 +414,7 @@ function Projects() {
   
         if (dy > 0){
           // last move : down
-          if (e.deltaY < -25){
+          if (deltaY < -25){
             // go up
             dy = -1;
             console.log('up');
@@ -513,7 +423,7 @@ function Projects() {
           }
         } else if (dy < 0){
           // last move : up
-          if (e.deltaY > 25){
+          if (deltaY > 25){
             // go down
             dy = 1;
             console.log('down');
@@ -532,6 +442,34 @@ function Projects() {
   }
 
   useEffect(() => {
+    if (projects[currentProject].category > 0){
+      category = 'Creative & video';
+    } else {
+      category = 'Programming';
+    }
+    let cat = document.getElementById('category');
+    if (cat.textContent != category){
+      cat.animate([
+          { opacity: '0' }
+      ], {
+          duration: 500
+      });
+      setTimeout(() => {
+        cat.style.opacity = 0;
+        cat.textContent = category;
+      }, 500);
+      setTimeout(() => {
+          cat.animate([
+              { opacity: '1' }
+          ], {
+              duration: 500
+          });
+          setTimeout(() => {
+              cat.style.opacity = 1;
+          }, 500);          
+      }, 600);
+    }
+    
     if(firstRender.current[0]){
       firstRender.current[0] = false;
     } else if (mobileScroll){
@@ -568,9 +506,12 @@ function Projects() {
       <div className="projectSection z-10"
       onKeyDown={keyScroll}
       onWheel={mouseScroll}
+      onTouchMove={mouseScroll}
       tabIndex="0"
       id='scrollToDetailsAnchor'>
-        <p className="pl-10 pt-10 z-10 relative text-2xl order-1" onClick={() => scrollProject()}><a href="#root">Programming</a></p>
+        <p className="pl-10 pt-10 z-10 relative text-2xl order-1" 
+        // onClick={() => scrollProject()}
+        ><a href="#root" id='category'>Programming</a></p>
 
         <div className="flex flex-col 460:block items-center cursor-pointer z-10 text-1xl lg:absolute bottom-6 w-full font-medium text-center order-3">
           <div className="flex 460:inline-block">
@@ -612,7 +553,9 @@ function Projects() {
         pic={findPic(projects[lastProject].pic)}
         picAlt={projects[lastProject].picAlt}
         title={projects[lastProject].title}
+        date={projects[lastProject].date}
         text={projects[lastProject].text}
+        link={projects[lastProject].link}
         skills={projects[lastProject].skills}
       />
     </div>

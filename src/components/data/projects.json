@@ -1,56 +1,163 @@
 [{
+    "category": "0",
     "thumb": "zoey.jpg",
     "thumbAlt": "",
     "thumbCaption": "Zoey",
-    "title": "Zoey, un réseau social pour les animaux",
-    "text": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Est, nemo cum. Vitae rem, mollitia praesentium natus similique voluptatum ipsa perspiciatis necessitatibus cum aliquid qui modi dolorem tempora fugit quidem nemo!",
+    "title": "Fighting against animal abandon with an app bringing forward pet adoption",
+    "date": "Since september 2021",
+    "text": "I built the back-end of an app with a whole social network feature, including instant messaging, friend requests, or posting photos. I designed and developed the platform’s MVC architecture. We are currently working on the front-end of the app for a release planned in March. We deployed Scrum, and as the Product Owner of the project, I learnt to write a product backlog, to prioritize user stories, and many team. Zoey is a student project made in the second year of my technology degree in Multimedia.",
+    "link": "https://zoey-app.fr",
     "skills":[
-        "ReactJS",
-        "Tailwind CSS",
-        "Sass"
+        "PHP",
+        "JavaScript",
+        "Project management"
     ],
     "pic": "mockupZoey.jpg",
     "picAlt": ""
-},
-{
-    "thumb": "zoey.jpg",
+},{
+    "category": "0",
+    "thumb": "portfolioMockup.jpg",
     "thumbAlt": "",
-    "thumbCaption": "Zoey",
-    "title": "title2",
-    "text": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Est, nemo cum. Vitae rem, mollitia praesentium natus similique voluptatum ipsa perspiciatis necessitatibus cum aliquid qui modi dolorem tempora fugit quidem nemo!",
+    "thumbCaption": "Portfolio",
+    "title": "Showcase my work and reveal my projects",
+    "date": "December 2021 - January 2022",
+    "text": "For my degree in Multimedia, I designed and developed this portfolio. I used this opportunity to try new tools such as React, Tailwind CSS or Sass in a real project.",
+    "link": "https://marinb.com/",
     "skills":[
-        "ReactJS",
+        "React",
         "Tailwind CSS",
         "Sass"
     ],
-    "pic": "mockupZoey.jpg",
+    "pic": "portfolioMockup.jpg",
     "picAlt": ""
-},
-{
-    "thumb": "zoey.jpg",
+},{
+    "category": "0",
+    "thumb": "cv.jpg",
     "thumbAlt": "",
-    "thumbCaption": "Zoey",
-    "title": "title3",
-    "text": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Est, nemo cum. Vitae rem, mollitia praesentium natus similique voluptatum ipsa perspiciatis necessitatibus cum aliquid qui modi dolorem tempora fugit quidem nemo!",
+    "thumbCaption": "CV Interactif",
+    "title": "Show my academic and professional career",
+    "date": "March 2021",
+    "text": "For my first year of technology degree in Multimedia, I designed and developed my personal website. If you want to work with me, it’s a place where you can get in touch with me. It was my first experience in developing a fully responsive website alone, and I learnt a lot in front-end development and positioning.",
+    "link": "https://marinb.com/",
     "skills":[
-        "ReactJS",
-        "Tailwind CSS",
-        "Sass"
+        "Figma",
+        "SVG"
     ],
-    "pic": "mockupZoey.jpg",
+    "pic": "cv.jpg",
     "picAlt": ""
-},
-{
-    "thumb": "zoey.jpg",
+},{
+    "category": "0",
+    "thumb": "codepen.png",
     "thumbAlt": "",
-    "thumbCaption": "Zoey",
-    "title": "title4",
-    "text": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Est, nemo cum. Vitae rem, mollitia praesentium natus similique voluptatum ipsa perspiciatis necessitatibus cum aliquid qui modi dolorem tempora fugit quidem nemo!",
+    "thumbCaption": "Color picker",
+    "title": "Demonstration : web color picker with sliders",
+    "date": "October 2021",
+    "text": "For a project in my second year of technology degree in Multimedia, I developed a small tool to explain how hexadecimal color codes work. You can try it by yourself on my codepen page. Play with the sliders to understand how color codes work on the web.",
+    "link": "https://codepen.io/marin-bouanchaud/pen/oNGvqYo",
     "skills":[
-        "ReactJS",
-        "Tailwind CSS",
-        "Sass"
+        "HTML",
+        "JavaScript"
     ],
-    "pic": "mockupZoey.jpg",
+    "pic": "hexa.jpg",
+    "picAlt": ""
+},{
+    "category": "0",
+    "thumb": "accueil.png",
+    "thumbAlt": "",
+    "thumbCaption": "Find Your Way",
+    "title": "Find your way after your degree in multimedia",
+    "date": "January 2021 - March 2021",
+    "text": "For a project in my first year of technology degree, we developed with a small team a website made to introduce occupations accessible after a degree in multimedia. We created all the website’s content, including video interviews and social media communication. \n We learnt all the bases of project management and had to put in practice our knowledge in back-end development. The website was only made for desktop.",
+    "link": "",
+    "skills":[
+        "CSS",
+        "PHP",
+        "jQuery"
+    ],
+    "pic": "dev.png",
+    "picAlt": ""
+},{
+    "category": "1",
+    "thumb": "miniaturettt.jpg",
+    "thumbAlt": "",
+    "thumbCaption": "Documentary films",
+    "title": "I made two documentary films about contemporary music",
+    "date": "March 2020 - June 2021",
+    "text": "I made a first 30” documentary for a nonprofit organization in 2020, and a second 52” documentary for a music festival in 2021. For the first one, I was responsible for filming as well as editing the movie, and for the second one I was mostly responsible for the editing, but also shot some B-roll footage. They have been projected in festivals and the first one is already available online.",
+    "link": "https://www.youtube.com/watch?v=DpQo7I0JApk",
+    "skills":[
+        "Interview filming", "Voice over recording", "Editing"
+    ],
+    "pic": "timeline.png",
+    "picAlt": ""
+},{
+    "category": "1",
+    "thumb": "event.jpg",
+    "thumbAlt": "",
+    "thumbCaption": "Livestreaming",
+    "title": "I make video recordings and livestreamings for events",
+    "date": "Since 2020",
+    "text": "I am working as a freelance to record and livestream corporate events, shows or concerts.",
+    "link": "",
+    "skills":[
+        "Business management", "Streaming", "Event management" 
+    ],
+    "pic": "live.jpg",
+    "picAlt": ""
+},{
+    "category": "1",
+    "thumb": "concert.png",
+    "thumbAlt": "",
+    "thumbCaption": "Concerts recording",
+    "title": "I made video recordings of a show for a students organization",
+    "date": "December 2018 - December 2020",
+    "text": "I started to make videos back in 2013. As a musician, I was soon asked by friends and acquaintances to record concerts. Since 2016, I have recorded dozens of concerts and shows. I worked for 3 years for the students organization of my high school to record an annual show. I recorded the show with a team of 4, and edited a 2 hours long multicam recording.",
+    "link": "",
+    "skills":[
+        "Team management", "Multicam editing"
+    ],
+    "pic": "setup.jpg",
+    "picAlt": ""
+},{
+    "category": "1",
+    "thumb": "desktop.png",
+    "thumbAlt": "",
+    "thumbCaption": "Video CV",
+    "title": "I made an original video CV to introduce myself",
+    "date": "October 2021 - December 2021",
+    "text": "For my second year of technology degree in multimedia, I created a video CV to help me find internships and college.",
+    "link": "https://drive.google.com/file/d/14JiUED1ulUzmIm5JT05DlhoddD-xthOL/view?usp=sharing",
+    "skills":[
+        "Premiere Pro", "After Effects"
+    ],
+    "pic": "filming.png",
+    "picAlt": ""
+},{
+    "category": "1",
+    "thumb": "motion.png",
+    "thumbAlt": "",
+    "thumbCaption": "Motion design",
+    "title": "I made a motion design to raise awareness about animal abandon",
+    "date": "December 2021",
+    "text": "For my second year of technology degree in multimedia, I created a motion design for my project Zoey. I wrote an article on animal abandonment in France, to sensibilize on the necessity of adopting pets, and I wanted to illustrate my research with a motion design, to explain the issue about abandonment.",
+    "link": "https://drive.google.com/file/d/14JvoF11RtuRzOSe8yjAF5ocn50mW4q5h/view?usp=sharing",
+    "skills":[
+        "Writing", "After Effects"
+    ],
+    "pic": "after.png",
+    "picAlt": ""
+},{
+    "category": "1",
+    "thumb": "ny.png",
+    "thumbAlt": "",
+    "thumbCaption": "Photography",
+    "title": "Nature and architecture photography",
+    "date": "Since 2014",
+    "text": "I started photography very young, and I soon became interested in nature photography and urban or architecture photography. In 2014, I began posting regularly my creations on Instagram. I’ve even been posting one photo a day for several years. I was regularly taking long walks across Paris to take pictures of the city, in known as well as unknown places. I also made photographic series were about timelapses and long exposures. My last series - not published yet - are about plane photography.",
+    "link": "https://www.instagram.com/_Marin2705_/",
+    "skills":[
+        "Photography", "Timelapse", "Photoshop"
+    ],
+    "pic": "plane.jpg",
     "picAlt": ""
 }]
