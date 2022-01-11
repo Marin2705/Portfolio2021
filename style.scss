@@ -17,7 +17,7 @@
         @apply max-w-[400px] max-h-full;
     }
     .projectFig img{
-        @apply rounded-3xl drop-shadow-lg h-[10%] max-h-[300px] object-cover aspect-video;
+        @apply rounded-3xl drop-shadow-lg h-[10%] max-h-[300px] object-cover aspect-[4/3];
     }
     .projectFig figcaption{
         @apply mt-4 lg:mt-8 text-3xl font-light;
