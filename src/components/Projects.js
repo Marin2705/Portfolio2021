@@ -63,16 +63,35 @@ function revealDetails(d = null){
       }, duration);
     }
   } else {
+    const arrowProject = document.getElementById('arrowProject')
     const scrollContainer = document.getElementById('scrollContainer')
     let offset = document.getElementById('scrollToDetailsAnchor').offsetLeft;
   
     function doScrollLeft(){
+      arrowProject.style.opacity = 1;
+      arrowProject.animate([
+          { opacity: '0' }
+      ], {
+          duration: 500
+      });
+      setTimeout(() => {
+        arrowProject.style.opacity = 0;
+      }, 500);
       scrollContainer.scrollTo({
         left: 0,
         behavior: 'smooth'
       });
     }
     function doScrollRight(){
+      arrowProject.style.opacity = 0;
+      arrowProject.animate([
+          { opacity: '1' }
+      ], {
+          duration: 500
+      });
+      setTimeout(() => {
+        arrowProject.style.opacity = 1;
+      }, 500);
       scrollContainer.scrollTo({
         left: offset,
         behavior: 'smooth'
@@ -509,16 +528,24 @@ function Projects() {
       onTouchMove={mouseScroll}
       tabIndex="0"
       id='scrollToDetailsAnchor'>
-        <p className="pl-10 pt-10 z-10 relative text-2xl order-1" 
+        <svg className="cursor-pointer hidden lg:block mt-10 pl-10 w-1/5 h-[100px] invisible z-10 relative lg:visible opacity-0" width="75" height="75" viewBox="0 0 45 30" fill="none" xmlns="http://www.w3.org/2000/svg" id='arrowProject'
+        onClick={() => {revealDetails();console.log("a");}}
+        >
+          <path d="M43 17C44.1046 17 45 16.1046 45 15C45 13.8954 44.1046 13 43 13V17ZM0.585786 13.5858C-0.195262 14.3668 -0.195262 15.6332 0.585786 16.4142L13.3137 29.1421C14.0948 29.9232 15.3611 29.9232 16.1421 29.1421C16.9232 28.3611 16.9232 27.0948 16.1421 26.3137L4.82843 15L16.1421 3.68629C16.9232 2.90524 16.9232 1.63891 16.1421 0.857864C15.3611 0.0768158 14.0948 0.0768158 13.3137 0.857864L0.585786 13.5858ZM43 13L2 13V17L43 17V13Z" fill="black"/>
+        </svg>
+        <p className="pl-10 pt-10 lg:pt-0 z-10 relative text-3xl order-1 lg:text-[2rem]" 
         // onClick={() => scrollProject()}
         ><a href="#root" id='category'>Programming</a></p>
 
-        <div className="flex flex-col 460:block items-center cursor-pointer z-10 text-1xl lg:absolute bottom-6 w-full font-medium text-center order-3">
+        <div className="flex flex-col 460:block items-center cursor-pointer z-10 text-1xl lg:absolute bottom-[100px] w-full font-medium text-center order-3">
+          
           <div className="flex 460:inline-block">
-            <a href="#root" onClick={() => scrollProject(0)} className='w-fit inline-block m-3  btn'>Last project</a><a
+            <a href="#root" onClick={() => scrollProject(0)} className='w-fit inline-block m-3 btn'>Previous project</a><a
             
              href="#root" onClick={() => scrollProject(1)} className='w-fit inline-block m-3 a btn'>Next project</a>
-          </div><a 
+          </div>
+          
+          {/* <a 
           
           href="#root" onClick={() => {
             revealDetails();
@@ -526,7 +553,7 @@ function Projects() {
               let learnMoreBtn = document.getElementById('learnMoreBtn');
               learnMoreBtn.textContent = learnMoreBtn.textContent == 'Go back' ? 'Learn more' : 'Go back';
             }            
-            }} className='w-fit inline-block m-3 btn' id='learnMoreBtn'>Learn more</a>
+            }} className='w-fit inline-block m-3 btn' id='learnMoreBtn'>Learn more</a> */}
         </div>
 
         <div className="projectContainer order-2" id="projectContainerScroll">
@@ -543,6 +570,7 @@ function Projects() {
                   thumb={findPic(project.thumb)}
                   thumbAlt={project.thumbAlt}
                   thumbCaption={project.thumbCaption}
+                  text={project.text}
                 />
               );
             })

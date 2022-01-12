@@ -6,6 +6,7 @@ function ProjectTemplate(props) {
       <figure className='projectFig'>
         <img src={props.thumb} alt={props.thumbAlt} className="max-w-[60vw]"/>
         <figcaption>{props.thumbCaption}</figcaption>
+        <p className="font-thin lg:text-1xl">{props.text.substring(0,50)}... <br /><a href="#root" className="underline">Learn more</a></p>
       </figure>
     </div>
   );

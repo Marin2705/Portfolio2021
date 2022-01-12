@@ -5,7 +5,7 @@
     "thumbCaption": "Zoey",
     "title": "Fighting against animal abandon with an app bringing forward pet adoption",
     "date": "Since september 2021",
-    "text": "I built the back-end of an app with a whole social network feature, including instant messaging, friend requests, or posting photos. I designed and developed the platform’s MVC architecture. We are currently working on the front-end of the app for a release planned in March. We deployed Scrum, and as the Product Owner of the project, I learnt to write a product backlog, to prioritize user stories, and many team. Zoey is a student project made in the second year of my technology degree in Multimedia.",
+    "text": "I built the back-end of an app with a whole social network feature, including instant messaging, friend requests, or posting photos. I designed and developed the platform’s MVC architecture. We are currently working on the front-end of the app for a release planned in March. We deployed Scrum, and as the Product Owner of the project, I learnt to write a product backlog, to prioritize user stories, and many team. Zoey is a student project made in the second year of my technology degree in multimedia.",
     "link": "https://zoey-app.fr",
     "skills":[
         "PHP",
@@ -21,7 +21,7 @@
     "thumbCaption": "Portfolio",
     "title": "Showcase my work and reveal my projects",
     "date": "December 2021 - January 2022",
-    "text": "For my degree in Multimedia, I designed and developed this portfolio. I used this opportunity to try new tools such as React, Tailwind CSS or Sass in a real project.",
+    "text": "For my degree in multimedia, I designed and developed this portfolio. I used this opportunity to try new tools such as React, Tailwind CSS or Sass in a real project.",
     "link": "https://marinb.com/",
     "skills":[
         "React",
@@ -37,7 +37,7 @@
     "thumbCaption": "CV Interactif",
     "title": "Show my academic and professional career",
     "date": "March 2021",
-    "text": "For my first year of technology degree in Multimedia, I designed and developed my personal website. If you want to work with me, it’s a place where you can get in touch with me. It was my first experience in developing a fully responsive website alone, and I learnt a lot in front-end development and positioning.",
+    "text": "For my first year of technology degree in multimedia, I designed and developed my personal website. If you want to work with me, it’s a place where you can get in touch with me. It was my first experience in developing a fully responsive website alone, and I learnt a lot in front-end development and positioning.",
     "link": "https://marinb.com/",
     "skills":[
         "Figma",
@@ -52,7 +52,7 @@
     "thumbCaption": "Color picker",
     "title": "Demonstration : web color picker with sliders",
     "date": "October 2021",
-    "text": "For a project in my second year of technology degree in Multimedia, I developed a small tool to explain how hexadecimal color codes work. You can try it by yourself on my codepen page. Play with the sliders to understand how color codes work on the web.",
+    "text": "For a project in my second year of technology degree in multimedia, I developed a small tool to explain how hexadecimal color codes work. You can try it by yourself on my codepen page. Play with the sliders to understand how color codes work on the web.",
     "link": "https://codepen.io/marin-bouanchaud/pen/oNGvqYo",
     "skills":[
         "HTML",

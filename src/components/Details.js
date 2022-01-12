@@ -24,7 +24,7 @@ function Details(props) {
 
         <figure className='projectFig m-auto text-center mt-20 pb-10'>
           <img src={props.pic} alt={props.picAlt} className="mb-10 w-full" />
-          <a href={props.link} target="_blank" className='btn'>Voir le projet</a>
+          <a href={props.link} target="_blank" className='btn'>Go to projet</a>
         </figure>
       </div>
     </div>
