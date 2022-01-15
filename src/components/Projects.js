@@ -30,8 +30,10 @@ document.addEventListener('touchstart', (e) => {
 })
 
 function revealDetails(d = null){
-  console.log('revealDetails, mobileScroll : ', mobileScroll);
+  console.log('Reveal ', d);
+  // console.log('revealDetails, mobileScroll : ', mobileScroll);
   if (mobileScroll){
+    console.log('mobilescroll');
     let duration = 250;
     let details = document.getElementById('details');
     let scrollContainer = document.getElementById('scrollContainer');
@@ -63,12 +65,14 @@ function revealDetails(d = null){
       }, duration);
     }
   } else {
-    const arrowProject = document.getElementById('arrowProject')
-    const scrollContainer = document.getElementById('scrollContainer')
+    // console.log('!mobilescroll');
+    const arrowProject = document.getElementById('arrowProject');
+    const scrollContainer = document.getElementById('scrollContainer');
     let offset = document.getElementById('scrollToDetailsAnchor').offsetLeft;
   
     function doScrollLeft(){
       arrowProject.style.opacity = 1;
+      arrowProject.classList.remove('cursor-pointer');
       arrowProject.animate([
           { opacity: '0' }
       ], {
@@ -77,6 +81,9 @@ function revealDetails(d = null){
       setTimeout(() => {
         arrowProject.style.opacity = 0;
       }, 500);
+      
+      console.log('SCROLLTO LEFT');
+      // scrollContainer.scrollLeft = 0
       scrollContainer.scrollTo({
         left: 0,
         behavior: 'smooth'
@@ -84,6 +91,7 @@ function revealDetails(d = null){
     }
     function doScrollRight(){
       arrowProject.style.opacity = 0;
+      arrowProject.classList.add('cursor-pointer');
       arrowProject.animate([
           { opacity: '1' }
       ], {
@@ -92,6 +100,9 @@ function revealDetails(d = null){
       setTimeout(() => {
         arrowProject.style.opacity = 1;
       }, 500);
+
+      console.log('SCROLLTO RIGHT');
+      // scrollContainer.scrollLeft = 200
       scrollContainer.scrollTo({
         left: offset,
         behavior: 'smooth'
@@ -99,7 +110,7 @@ function revealDetails(d = null){
     }
   
     if (d){
-      if (d == 0) {
+      if (d == -1) {
         doScrollLeft();
       } else if (d == 1){
         doScrollRight();
@@ -116,7 +127,7 @@ function revealDetails(d = null){
 }
 document.addEventListener("DOMContentLoaded", function(){
   document.getElementById('arrowDetails').onclick = () => {
-    revealDetails(0);
+    revealDetails(-1);
   }
   // listen for click on each project
   projects.map((project, i) => {
@@ -145,79 +156,134 @@ let wheelFlag = true;
 let _scrollTimeout = null;
 let dy = 0;
 let dx = 0;
+let lastDeltaX = 25;
+let lastDeltaFlag = false;
+let repetitions = 0
 function scrollHandler(e) {
-  if (!wheelFlag){
-    clearTimeout(_scrollTimeout);
-    _scrollTimeout = setTimeout(function() {
-      wheelFlag = true;
-      dx = 0;
-    }, 250);
-  }
+  // if (!wheelFlag){
+  //   clearTimeout(_scrollTimeout);
+  //   _scrollTimeout = setTimeout(function() {
+  //     wheelFlag = true;
+  //     dx = 0;
+  //   }, 250);
+  // }
 
   // calculate delta for touchscreens
   let deltaX;
-  let deltaY;
+  // let deltaY;
   if ('changedTouches' in e){
     deltaX = touchstartX-e.changedTouches[0].clientX;
-    deltaY = touchstartY-e.changedTouches[0].clientY;
+    // deltaY = touchstartY-e.changedTouches[0].clientY;
   } else {
     deltaX = e.deltaX;
-    deltaY = e.deltaY;
+    // deltaY = e.deltaY;
   }
 
-  // first (or after timeout) scroll :
-  if (dx == 0){
-    // test direction
-    if (deltaX > 25){
+  // console.log('delta ', deltaX, ' > last : ', lastDeltaX);
+
+  if (lastDeltaFlag && lastDeltaX > 0 && deltaX < lastDeltaX){
+    console.log('REDESCENTE');
+    lastDeltaFlag = false;
+  } else if (lastDeltaFlag && lastDeltaX < 0 && deltaX > lastDeltaX){
+    console.log('REMONTEE');
+    lastDeltaFlag = false;
+  }
+
+  if (!lastDeltaFlag && deltaX > 25){
+
+     if (deltaX > lastDeltaX + 10){
+      if (++repetitions > 3){
+        console.log('RIGHT');
+        lastDeltaFlag = true;
+        repetitions = 0;
+        revealDetails(1);
+      }
       // go right
-      dx = 1;
-    } else if (deltaX < -25){
-      // go left
-      dx = -1;
-    } else {
-      return;
     }
+
+  } else if (!lastDeltaFlag && deltaX < -25) {
+    if (deltaX < lastDeltaX - 10){
+      if (++repetitions > 3){
+        console.log('LEFT');
+        lastDeltaFlag = true;
+        repetitions = 0;
+        revealDetails(-1);
+      }
+      // go right
+    }
+  }
+
+  lastDeltaX = deltaX;
+  return;
+
+  // // first (or after timeout) scroll :
+  // if (dx == 0){
+  //   // test direction
+  //   if (deltaX > 25){
+  //     // go right
+  //     dx = 1;
+  //   } else if (deltaX < -25){
+  //     // go left
+  //     dx = -1;
+  //   } else {
+  //     return;
+  //   }
     
-    wheelFlag = false;
-    if (dx > 0){
-      revealDetails(1);
-    } else if (dx < 0){
-      revealDetails(0);
-    }
-    return;
-  }
+  //   wheelFlag = false;
+  //   if (dx > 0){
+  //     revealDetails(1);
+  //   } else if (dx < 0){
+  //     revealDetails(0);
+  //   }
+  //   return;
+  // }
 
-  // next scrolls (detect last move) :
-  if (dx > 0){
-    // last move : right
-    if (deltaX < -25){
-      // go left
-      dx = -1;
-      revealDetails(0);
-    }
-  }
-  if (dx < 0){
-    // last move : left
-    if (deltaX > 25){
-      // go right
-      dx = 1;
-      revealDetails(1);
-    }
-  }
+  // // next scrolls (detect last move) :
+  // if (dx > 0){
+  //   // last move : right
+  //   if (deltaX < -25){
+  //     // go left
+  //     dx = -1;
+  //     revealDetails(0);
+  //   }
+  // }
+  // if (dx < 0){
+  //   // last move : left
+  //   if (deltaX > 25){
+  //     // go right
+  //     dx = 1;
+  //     revealDetails(1);
+  //   }
+  // }
 }
 
 function projectScroll(e){
   // calculate delta for touchscreens
   let deltaX;
+  let deltaY;
+  let touch = false;
   if ('changedTouches' in e){
+    touch = true;
     deltaX = touchstartX-e.changedTouches[0].clientX;
+    deltaY = touchstartX-e.changedTouches[0].clientY;
   } else {
     deltaX = e.deltaX;
+    deltaY = e.deltaY;
   }
 
-  if (deltaX > 0 || deltaX < 0){
-    e.preventDefault();
+  if (touch){
+    if (deltaX >= 10 || deltaX <= -10){
+      // console.log('TOUCH');
+      e.preventDefault();
+    }
+  } else {
+    if (deltaX >= 1 || deltaX <= -1){
+      // console.log('MOUSE');
+      e.preventDefault();
+    }
   }
+
+  
 }
 
 function preventDefault(e) {
@@ -231,7 +297,7 @@ function preventDefaultForScrollKeys(e) {
   }
   if (e.keyCode == 37) {
     preventDefault(e);
-    revealDetails(0);
+    revealDetails(-1);
   } else if (e.keyCode == 39){
     preventDefault(e);
     revealDetails(1);
@@ -293,7 +359,7 @@ function enableScroll() {
 
 function handleNoScroll(){
   console.log('resize');
-  if (window.innerWidth < 1024 || window.innerHeight < 720){
+  if (window.innerWidth < 1024 || window.innerHeight < 860){
     console.log('enable');
     enableScroll();
     document.getElementById('scrollContainer').scrollTo({
@@ -334,9 +400,20 @@ function Projects() {
       id = currentProject + 1;
     }
     if (id >= projects.length){
-      id = 0;
+      // console.log(projects.length - 1);
+      document.getElementById('projectElem-'+(projects.length - 1)).classList.add('animateShake');
+      setTimeout(() => {
+        document.getElementById('projectElem-'+(projects.length - 1)).classList.remove('animateShake');
+      }, 500);
+      // id = 0;
+      return;
     } else if (id < 0){
-      id = projects.length - 1;
+      document.getElementById('projectElem-0').classList.add('animateShake');
+      setTimeout(() => {
+        document.getElementById('projectElem-0').classList.remove('animateShake');
+      }, 500);
+      // id = projects.length - 1;
+      return;
     }
     console.log('scrollProject id',id);
     updateCurrentProject(id);
@@ -369,11 +446,17 @@ function Projects() {
     }
   }
 
+  let projectLastDeltaY = 25;
+  let projectLastDeltaX = 25;
+  let projectLastDeltaFlag = false;
+  let projectTimeFlag = false;
+  let projectRepetitions = 0;
   function mouseScroll(e){
-    // calculate delta for touchscreens
+    let touch = false;
     let deltaX;
     let deltaY;
     if ('changedTouches' in e){
+      touch = true;
       deltaX = touchstartX-e.changedTouches[0].clientX;
       deltaY = touchstartY-e.changedTouches[0].clientY;
     } else {
@@ -381,83 +464,220 @@ function Projects() {
       deltaY = e.deltaY;
     }
 
-    if(mobileScroll){
-      if (mouseScrollFlag){
-        console.log('mouseScroll');
-        if (deltaX > 10){
-          // go right
-          dx = 1;
-          scrollProject(1);
-          mouseScrollFlag = false;
-        } else if (deltaX < -10){
-          // go left
-          dx = -1;
-          scrollProject(0);
-          mouseScrollFlag = false;
-        }
-      } else {
-        console.log('mouseScroll');
-  
-        if (dx > 0){
-          if (deltaX < -25){
+    if (touch){
+      if(mobileScroll){
+        if (mouseScrollFlag){
+          console.log('mouseScroll');
+          if (deltaX > 10){
+            // go right
+            dx = 1;
+            scrollProject(1);
+            mouseScrollFlag = false;
+          } else if (deltaX < -10){
+            // go left
             dx = -1;
             scrollProject(0);
             mouseScrollFlag = false;
           }
-        } else if (dx < 0){
-          if (deltaX > 25){
-            dx = 1;
-            scrollProject(1);
-            mouseScrollFlag = false;
+        } else {
+          console.log('mouseScroll');
+    
+          if (dx > 0){
+            if (deltaX < -25){
+              dx = -1;
+              scrollProject(0);
+              mouseScrollFlag = false;
+            }
+          } else if (dx < 0){
+            if (deltaX > 25){
+              dx = 1;
+              scrollProject(1);
+              mouseScrollFlag = false;
+            }
           }
-        }
-      }
-    } else {
-      if (mouseScrollFlag){
-        console.log('mouseScroll');
-        if (deltaY > 25){
-          // go down
-          dy = 1;
-          console.log('down');
-          scrollProject(1);
-          mouseScrollFlag = false;
-        } else if (deltaY < -25){
-          // go up
-          dy = -1;
-          console.log('up');
-          scrollProject(0);
-          mouseScrollFlag = false;
         }
       } else {
-        console.log('mouseScrollFlag !');
-  
-        if (dy > 0){
-          // last move : down
-          if (deltaY < -25){
-            // go up
-            dy = -1;
-            console.log('up');
-            scrollProject(0);
-            mouseScrollFlag = false;
-          }
-        } else if (dy < 0){
-          // last move : up
+        if (mouseScrollFlag){
+          console.log('mouseScroll');
           if (deltaY > 25){
             // go down
             dy = 1;
             console.log('down');
             scrollProject(1);
             mouseScrollFlag = false;
+          } else if (deltaY < -25){
+            // go up
+            dy = -1;
+            console.log('up');
+            scrollProject(0);
+            mouseScrollFlag = false;
+          }
+        } else {
+          console.log('mouseScrollFlag !');
+    
+          if (dy > 0){
+            // last move : down
+            if (deltaY < -25){
+              // go up
+              dy = -1;
+              console.log('up');
+              scrollProject(0);
+              mouseScrollFlag = false;
+            }
+          } else if (dy < 0){
+            // last move : up
+            if (deltaY > 25){
+              // go down
+              dy = 1;
+              console.log('down');
+              scrollProject(1);
+              mouseScrollFlag = false;
+            }
           }
         }
       }
+  
+      clearTimeout(mouseScrollTimeout);
+      mouseScrollTimeout = setTimeout(function() {
+        console.log("clear mouseScroll");
+        mouseScrollFlag = true;
+      }, 250);
+
+    } else {
+      if (mobileScroll){
+        if (projectLastDeltaFlag && projectLastDeltaX > 0 && deltaX < projectLastDeltaX){
+          console.log('REDESCENTE');
+          projectLastDeltaFlag = false;
+        } else if (projectLastDeltaFlag && projectLastDeltaX < 0 && deltaX > projectLastDeltaX){
+          console.log('REMONTEE');
+          projectLastDeltaFlag = false;
+        }
+    
+        if (!projectTimeFlag 
+          && !projectLastDeltaFlag && deltaX > 5
+          && deltaX > projectLastDeltaX
+          && ++projectRepetitions > 10){
+            console.log('RIGHT');
+            projectTimeFlag = true;
+            setTimeout(() => {
+              projectTimeFlag = false;
+              console.log('TIME OK');
+            }, 150);
+            projectLastDeltaFlag = true;
+            projectRepetitions = 0;
+            scrollProject(1);
+    
+        } else if (!projectTimeFlag 
+          && !projectLastDeltaFlag && deltaX < -5
+          && deltaX < projectLastDeltaX
+          && ++projectRepetitions > 10) {
+            console.log('LEFT');
+            projectTimeFlag = true;
+            setTimeout(() => {
+              console.log('TIME OK');
+              projectTimeFlag = false;
+            }, 150);
+            projectLastDeltaFlag = true;
+            projectRepetitions = 0;
+            scrollProject(0);
+        }
+  
+        projectLastDeltaX = deltaX;
+  
+      } else {
+        if (projectLastDeltaFlag && projectLastDeltaY > 0 && deltaX < projectLastDeltaY){
+          console.log('REDESCENTE');
+          projectLastDeltaFlag = false;
+        } else if (projectLastDeltaFlag && projectLastDeltaY < 0 && deltaX > projectLastDeltaY){
+          console.log('REMONTEE');
+          projectLastDeltaFlag = false;
+        }
+    
+        if (!projectTimeFlag 
+          && !projectLastDeltaFlag && deltaY > 5
+          && deltaY > projectLastDeltaY
+          && ++projectRepetitions > 10){
+            console.log('UP');
+            projectTimeFlag = true;
+            setTimeout(() => {
+              projectTimeFlag = false;
+              console.log('TIME OK');
+            }, 150);
+            projectLastDeltaFlag = true;
+            projectRepetitions = 0;
+            scrollProject(1);
+    
+        } else if (!projectTimeFlag 
+          && !projectLastDeltaFlag && deltaY < -5
+          && deltaY < projectLastDeltaY
+          && ++projectRepetitions > 10) {
+            console.log('DOWN');
+            projectTimeFlag = true;
+            setTimeout(() => {
+              console.log('TIME OK');
+              projectTimeFlag = false;
+            }, 150);
+            projectLastDeltaFlag = true;
+            projectRepetitions = 0;
+            scrollProject(0);
+        }
+  
+        projectLastDeltaY = deltaY;
+      }
     }
 
-    clearTimeout(mouseScrollTimeout);
-    mouseScrollTimeout = setTimeout(function() {
-      console.log("clear mouseScroll");
-      mouseScrollFlag = true;
-    }, 250);
+    
+
+    return;
+
+    // if (!projectTimeFlag && !projectLastDeltaFlag && deltaY > 5){
+
+    //   if (deltaY > projectLastDeltaY){
+    //     if (++projectRepetitions > 10){
+    //       console.log('UP');
+    //       projectTimeFlag = true;
+    //       setTimeout(() => {
+    //         projectTimeFlag = false;
+    //         console.log('TIME OK');
+    //       }, 150);
+    //       projectLastDeltaFlag = true;
+    //       projectRepetitions = 0;
+    //       scrollProject(1);
+    //     }
+    //     // go right
+    //   }
+
+    // } else if (!projectTimeFlag && !projectLastDeltaFlag && deltaY < -5) {
+    //   if (deltaY < projectLastDeltaY){
+    //     if (++projectRepetitions > 10){
+    //       console.log('DOWN');
+    //       projectTimeFlag = true;
+    //       setTimeout(() => {
+    //         console.log('TIME OK');
+    //         projectTimeFlag = false;
+    //       }, 150);
+    //       projectLastDeltaFlag = true;
+    //       projectRepetitions = 0;
+    //       scrollProject(0);
+    //     }
+    //     // go right
+    //   }
+    // }
+
+
+    //////
+
+
+    // // calculate delta for touchscreens
+    // let deltaX;
+    // let deltaY;
+    // if ('changedTouches' in e){
+    //   deltaX = touchstartX-e.changedTouches[0].clientX;
+    //   deltaY = touchstartY-e.changedTouches[0].clientY;
+    // } else {
+    //   deltaX = e.deltaX;
+    //   deltaY = e.deltaY;
+    // }
   }
 
   useEffect(() => {
@@ -528,8 +748,14 @@ function Projects() {
       onTouchMove={mouseScroll}
       tabIndex="0"
       id='scrollToDetailsAnchor'>
-        <svg className="cursor-pointer hidden lg:block mt-10 pl-10 w-1/5 h-[100px] invisible z-10 relative lg:visible opacity-0" width="75" height="75" viewBox="0 0 45 30" fill="none" xmlns="http://www.w3.org/2000/svg" id='arrowProject'
-        onClick={() => {revealDetails();console.log("a");}}
+        <svg className="hidden lg:block mt-10 pl-10 w-1/5 h-[100px] invisible z-10 relative lg:visible opacity-0" width="75" height="75" viewBox="0 0 45 30" fill="none" xmlns="http://www.w3.org/2000/svg" id='arrowProject'
+        onClick={() => {
+          const scrollContainer = document.getElementById('scrollContainer');
+          let offset = document.getElementById('scrollToDetailsAnchor').offsetLeft;
+          if (scrollContainer.scrollLeft >= offset){
+            revealDetails(-1);
+          }
+        }}
         >
           <path d="M43 17C44.1046 17 45 16.1046 45 15C45 13.8954 44.1046 13 43 13V17ZM0.585786 13.5858C-0.195262 14.3668 -0.195262 15.6332 0.585786 16.4142L13.3137 29.1421C14.0948 29.9232 15.3611 29.9232 16.1421 29.1421C16.9232 28.3611 16.9232 27.0948 16.1421 26.3137L4.82843 15L16.1421 3.68629C16.9232 2.90524 16.9232 1.63891 16.1421 0.857864C15.3611 0.0768158 14.0948 0.0768158 13.3137 0.857864L0.585786 13.5858ZM43 13L2 13V17L43 17V13Z" fill="black"/>
         </svg>
@@ -537,7 +763,7 @@ function Projects() {
         // onClick={() => scrollProject()}
         ><a href="#root" id='category'>Programming</a></p>
 
-        <div className="flex flex-col 460:block items-center cursor-pointer z-10 text-1xl lg:absolute bottom-[100px] w-full font-medium text-center order-3">
+        <div className="flex flex-col 460:block items-center cursor-pointer z-10 text-1xl lg:absolute bottom-[100px] w-full font-medium text-center order-3 mb-5">
           
           <div className="flex 460:inline-block">
             <a href="#root" onClick={() => scrollProject(0)} className='w-fit inline-block m-3 btn'>Previous project</a><a
