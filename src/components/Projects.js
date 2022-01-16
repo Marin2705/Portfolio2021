@@ -5,6 +5,16 @@ import projects from './data/projects';
 import ProjectTemplate from './ProjectTemplate';
 import Details from './Details';
 
+const isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&
+                  navigator.userAgent &&
+                  navigator.userAgent.indexOf('CriOS') == -1 &&
+                  navigator.userAgent.indexOf('FxiOS') == -1;
+
+const isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+
+let  noScrollCompatibility = isSafari || isFirefox ? true : false;
+console.log('no scroll compatibility ? ', noScrollCompatibility);
+
 // this function looks for the picture in the /assets repertory
 // if no picture is found, it returns an empty string
 function findPic(urlInAssets){
@@ -32,13 +42,13 @@ document.addEventListener('touchstart', (e) => {
 function revealDetails(d = null){
   console.log('Reveal ', d);
   // console.log('revealDetails, mobileScroll : ', mobileScroll);
-  if (mobileScroll){
+  if (mobileScroll || isSafari){
     console.log('mobilescroll');
     let duration = 250;
     let details = document.getElementById('details');
     let scrollContainer = document.getElementById('scrollContainer');
-    if (hadClass){
-      console.log('hadClass');
+    if (!scrollContainer.classList.contains('overflow-x-hidden')){
+      scrollContainer.classList.add('overflow-x-hidden')
       scrollContainer.scrollTop = 0;
       details.animate([
         { left: '100%' }
@@ -47,13 +57,9 @@ function revealDetails(d = null){
       });
       setTimeout(() => {
         details.style.left = "100%";
-        scrollContainer.className = hadClass;
-        hadClass = null;
       }, duration);
     } else {
-      hadClass = scrollContainer.className;
-      console.log(hadClass);
-      scrollContainer.className = "";
+      scrollContainer.classList.remove('overflow-x-hidden')
       details.style.top = scrollContainer.scrollTop;
       details.animate([
         { left: '0' }
@@ -83,11 +89,16 @@ function revealDetails(d = null){
       }, 500);
       
       console.log('SCROLLTO LEFT');
-      // scrollContainer.scrollLeft = 0
-      scrollContainer.scrollTo({
-        left: 0,
-        behavior: 'smooth'
-      });
+
+      let scrollIntervalLeft = setInterval(() => {
+        (scrollContainer.scrollLeft <= (offset/3)) ? (scrollContainer.scrollLeft -= 15) : (scrollContainer.scrollLeft -= 25);
+        scrollContainer.scrollLeft <= 0 && clearInterval(scrollIntervalLeft);
+      }, 5);
+
+      // scrollContainer.scrollTo({
+      //   left: 0,
+      //   behavior: 'smooth'
+      // });
     }
     function doScrollRight(){
       arrowProject.style.opacity = 0;
@@ -102,11 +113,18 @@ function revealDetails(d = null){
       }, 500);
 
       console.log('SCROLLTO RIGHT');
-      // scrollContainer.scrollLeft = 200
-      scrollContainer.scrollTo({
-        left: offset,
-        behavior: 'smooth'
-      });
+
+      let scrollIntervalRight = setInterval(() => {
+        (scrollContainer.scrollLeft >= 2*(offset/3)) ? (scrollContainer.scrollLeft += 15) : (scrollContainer.scrollLeft += 25);
+        scrollContainer.scrollLeft >= offset && clearInterval(scrollIntervalRight);
+      }, 5);
+
+
+
+      // scrollContainer.scrollTo({
+      //   left: offset,
+      //   behavior: 'smooth'
+      // });
     }
   
     if (d){
@@ -385,6 +403,11 @@ window.onload = handleNoScroll;
 // }
 // listenToScroll();
 
+let scrollIntervalProjectRight;
+let scrollIntervalProjectLeft;
+let scrollIntervalProjectUp;
+let scrollIntervalProjectDown;
+
 function Projects() {
   const [lastProject, updateLastProject] = useState(0);
   const [currentProject, updateCurrentProject] = useState(0);
@@ -392,7 +415,7 @@ function Projects() {
   let category = 'Programming';
 
   function scrollProject(d = null){
-    console.log('scrollProject d',d);
+    console.log('scrollProject d ',d);
     let id = 0;
     if (d == 0){
       id = currentProject - 1;
@@ -418,16 +441,101 @@ function Projects() {
     console.log('scrollProject id',id);
     updateCurrentProject(id);
     if (mobileScroll){
-      document.getElementById('projectContainerScroll').scrollTo({
-        left: document.getElementById('projectElem-'+id).offsetLeft - 100,
-        behavior: 'smooth'
-      });
-    } else {      
-      updateCurrentProject(id);
-      document.getElementById('projectContainerScroll').scrollTo({
-        top: document.getElementById('projectElem-'+id).offsetTop,
-        behavior: 'smooth'
-      });
+      // SCROLL HORIZONTAL PROJECT
+      console.log('SCROLL HORIZONTAL PROJECT');
+
+      if (noScrollCompatibility) {
+        console.log('noScrollCompatibility');
+        let projectContainerScroll = document.getElementById('projectContainerScroll');
+        let offset = document.getElementById('projectElem-'+id).offsetLeft - 100;
+        let movement = offset - projectContainerScroll.scrollLeft;
+        let l = 0;
+
+        if (id >= projects.length - 1){
+          clearInterval(scrollIntervalProjectLeft);
+          scrollIntervalProjectRight = setInterval(() => {
+            projectContainerScroll.scrollLeft += 50;
+            projectContainerScroll.scrollLeft <= l && clearInterval(scrollIntervalProjectRight);
+            l = projectContainerScroll.scrollLeft;
+          }, 15);
+          
+        } else if (id <= 0){
+          clearInterval(scrollIntervalProjectRight);
+          scrollIntervalProjectLeft = setInterval(() => {
+            projectContainerScroll.scrollLeft -= 50;
+            projectContainerScroll.scrollLeft <= 0 && clearInterval(scrollIntervalProjectLeft);
+          }, 15);
+        } else {
+          if (movement >= 0) {
+            clearInterval(scrollIntervalProjectLeft);
+            scrollIntervalProjectRight = setInterval(() => {
+              projectContainerScroll.scrollLeft += 50;
+              projectContainerScroll.scrollLeft >= offset && clearInterval(scrollIntervalProjectRight);
+            }, 15);
+          } else {
+            clearInterval(scrollIntervalProjectRight);
+            scrollIntervalProjectLeft = setInterval(() => {
+              projectContainerScroll.scrollLeft -= 50;
+              projectContainerScroll.scrollLeft <= offset && clearInterval(scrollIntervalProjectLeft);
+            }, 15);
+          }
+        }
+      } else {
+        document.getElementById('projectContainerScroll').scrollTo({
+          left: document.getElementById('projectElem-'+id).offsetLeft - 100,
+          behavior: 'smooth'
+        });
+      }
+      
+    } else {
+      // SCROLL VERTICAL PROJECT
+
+
+      console.log('SCROLL VERTICAL PROJECT');
+
+      if (noScrollCompatibility){
+        console.log('noScrollCompatibility');
+        let projectContainerScroll = document.getElementById('projectContainerScroll');
+        let offset = document.getElementById('projectElem-'+id).offsetTop;
+        let movement = offset - projectContainerScroll.scrollTop;
+        let l = 0;
+
+        if (id >= projects.length - 1){
+          clearInterval(scrollIntervalProjectDown);
+          scrollIntervalProjectDown = setInterval(() => {
+            projectContainerScroll.scrollTop += 60;
+            projectContainerScroll.scrollTop <= l && clearInterval(scrollIntervalProjectDown);
+            l = projectContainerScroll.scrollTop;
+          }, 5);
+          
+        } else if (id <= 0){
+          clearInterval(scrollIntervalProjectDown);
+          scrollIntervalProjectDown = setInterval(() => {
+            projectContainerScroll.scrollTop -= 60;
+            projectContainerScroll.scrollTop <= 0 && clearInterval(scrollIntervalProjectDown);
+          }, 5);
+        } else {
+          if (movement >= 0) {
+            clearInterval(scrollIntervalProjectDown);
+            scrollIntervalProjectDown = setInterval(() => {
+              projectContainerScroll.scrollTop += 60;
+              projectContainerScroll.scrollTop >= offset && clearInterval(scrollIntervalProjectDown);
+            }, 15);
+          } else {
+            clearInterval(scrollIntervalProjectUp);
+            scrollIntervalProjectUp = setInterval(() => {
+              projectContainerScroll.scrollTop -= 60;
+              projectContainerScroll.scrollTop <= offset && clearInterval(scrollIntervalProjectUp);
+            }, 15);
+          }
+        }
+      } else {
+        document.getElementById('projectContainerScroll').scrollTo({
+          top: document.getElementById('projectElem-'+id).offsetTop,
+          behavior: 'smooth'
+        });
+      }
+      
     }
   }
   function keyScroll(e){

@@ -8,6 +8,7 @@ module.exports = {
       'sm': '640px',
       'md': '768px',
       'lg': { 'raw': '(min-height: 860px) and (min-width: 1024px)' },
+      'safari': { 'raw': 'not all and (min-resolution:.001dpcm)' },
       'xl': '1280px',
       '2xl': '1536px',
     },
