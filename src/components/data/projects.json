@@ -5,7 +5,7 @@
     "thumbCaption": "Zoey",
     "title": "Fighting against animal abandon with an app bringing forward pet adoption",
     "date": "Since september 2021",
-    "text": "I built the back-end of an app with a whole social network feature, including instant messaging, friend requests, or posting photos. I designed and developed the platform’s MVC architecture. We are currently working on the front-end of the app for a release planned in March. We deployed Scrum, and as the Product Owner of the project, I learnt to write a product backlog, to prioritize user stories, and many team. Zoey is a student project made in the second year of my technology degree in multimedia.",
+    "text": "I built the back-end of an app with a whole social network feature, including an instant messaging and posting photos. I designed and developed the platform’s MVC architecture. For this student project, we deployed Scrum, and as the Product Owner of the project, I learnt to write a product backlog and to use many team management tools like Trello or Redmine.",
     "link": "https://zoey-app.fr",
     "skills":[
         "PHP",
@@ -21,8 +21,8 @@
     "thumbCaption": "Portfolio",
     "title": "Showcase my work and reveal my projects",
     "date": "December 2021 - January 2022",
-    "text": "For my degree in multimedia, I designed and developed this portfolio. I used this opportunity to try new tools such as React, Tailwind CSS or Sass in a real project.",
-    "link": "https://marinb.com/",
+    "text": "I designed and developed this portfolio. I used this opportunity during my technology degree in multimedia to try new tools such as React, Tailwind CSS or Sass in a real project.",
+    "link": "",
     "skills":[
         "React",
         "Tailwind CSS",
@@ -34,12 +34,13 @@
     "category": "0",
     "thumb": "cv.jpg",
     "thumbAlt": "",
-    "thumbCaption": "CV Interactif",
+    "thumbCaption": "Interactive CV",
     "title": "Show my academic and professional career",
     "date": "March 2021",
-    "text": "For my first year of technology degree in multimedia, I designed and developed my personal website. If you want to work with me, it’s a place where you can get in touch with me. It was my first experience in developing a fully responsive website alone, and I learnt a lot in front-end development and positioning.",
+    "text": "I built an interactive CV. If you want to work with me, it’s a place where you can get in touch with me. It was my first experience in developing a fully responsive website alone, and I learnt a lot in front-end development and positioning.",
     "link": "https://marinb.com/",
     "skills":[
+        "CSS",
         "Figma",
         "SVG"
     ],
@@ -52,7 +53,7 @@
     "thumbCaption": "Color picker",
     "title": "Demonstration : web color picker with sliders",
     "date": "October 2021",
-    "text": "For a project in my second year of technology degree in multimedia, I developed a small tool to explain how hexadecimal color codes work. You can try it by yourself on my codepen page. Play with the sliders to understand how color codes work on the web.",
+    "text": "I developed a small tool to explain how hexadecimal color codes work For a project in my second year of technology degree in multimedia. You can try it by yourself on my codepen page. Play with the sliders to understand how color codes work on the web.",
     "link": "https://codepen.io/marin-bouanchaud/pen/oNGvqYo",
     "skills":[
         "HTML",
@@ -62,12 +63,28 @@
     "picAlt": ""
 },{
     "category": "0",
+    "thumb": "dragon.png",
+    "thumbAlt": "",
+    "thumbCaption": "Shoot 'Em Up",
+    "title": "Game development in d3js",
+    "date": "October 2021",
+    "text": "I developed a Shoot 'Em Up game with d3.js. The goal is to aim the flames your dragon throws at knights. If you survive after level 3, you will have to face a boss ! Try it on desktop.",
+    "link": "https://perso-etudiant.u-pem.fr/~marin.bouanchaud/dragon",
+    "skills":[
+        "d3js",
+        "object oriented",
+        "JavaScript"
+    ],
+    "pic": "d3.png",
+    "picAlt": ""
+},{
+    "category": "0",
     "thumb": "accueil.png",
     "thumbAlt": "",
     "thumbCaption": "Find Your Way",
     "title": "Find your way after your degree in multimedia",
     "date": "January 2021 - March 2021",
-    "text": "For a project in my first year of technology degree, we developed with a small team a website made to introduce occupations accessible after a degree in multimedia. We created all the website’s content, including video interviews and social media communication. \n We learnt all the bases of project management and had to put in practice our knowledge in back-end development. The website was only made for desktop.",
+    "text": "In my first year of technology degree, we developed with a small team a website made to introduce occupations accessible after a degree in multimedia. We created all the website’s content, including video interviews and social media communication. \n We learnt all the bases of project management and had to put in practice our knowledge in back-end development. The website was only made for desktop.",
     "link": "",
     "skills":[
         "CSS",
@@ -97,7 +114,7 @@
     "thumbCaption": "Livestreaming",
     "title": "I make video recordings and livestreamings for events",
     "date": "Since 2020",
-    "text": "I am working as a freelance to record and livestream corporate events, shows or concerts.",
+    "text": "I am working as a freelance to record and livestream corporate events, shows or concerts. Don't hesitate to get in touch with me on LinkedIn !",
     "link": "",
     "skills":[
         "Business management", "Streaming", "Event management" 
@@ -125,7 +142,7 @@
     "thumbCaption": "Video CV",
     "title": "I made an original video CV to introduce myself",
     "date": "October 2021 - December 2021",
-    "text": "For my second year of technology degree in multimedia, I created a video CV to help me find internships and college.",
+    "text": "I created a video CV to help me find internships and college for my second year of technology degree in multimedia. To stand out, I tried to introduce myself differently, highlighting my fields of expertise.",
     "link": "https://drive.google.com/file/d/14JiUED1ulUzmIm5JT05DlhoddD-xthOL/view?usp=sharing",
     "skills":[
         "Premiere Pro", "After Effects"
@@ -139,7 +156,7 @@
     "thumbCaption": "Motion design",
     "title": "I made a motion design to raise awareness about animal abandon",
     "date": "December 2021",
-    "text": "For my second year of technology degree in multimedia, I created a motion design for my project Zoey. I wrote an article on animal abandonment in France, to sensibilize on the necessity of adopting pets, and I wanted to illustrate my research with a motion design, to explain the issue about abandonment.",
+    "text": "I created a motion design for my project Zoey in my second year of technology degree in multimedia. I wrote an article on animal abandonment in France, to sensibilize on the necessity of adopting pets, and I wanted to illustrate my research with a motion design, to explain the issue about abandonment.",
     "link": "https://drive.google.com/file/d/14JvoF11RtuRzOSe8yjAF5ocn50mW4q5h/view?usp=sharing",
     "skills":[
         "Writing", "After Effects"
@@ -153,7 +170,7 @@
     "thumbCaption": "Photography",
     "title": "Nature and architecture photography",
     "date": "Since 2014",
-    "text": "I started photography very young, and I soon became interested in nature photography and urban or architecture photography. In 2014, I began posting regularly my creations on Instagram. I’ve even been posting one photo a day for several years. I was regularly taking long walks across Paris to take pictures of the city, in known as well as unknown places. I also made photographic series were about timelapses and long exposures. My last series - not published yet - are about plane photography.",
+    "text": "I started photography very young, and I soon became interested in nature photography and urban or architecture photography. In 2014, I began posting regularly my creations on Instagram. I’ve even been posting one photo a day for several years. I was regularly taking long walks across Paris to take pictures of the city, in known as well as unknown places. I made different photographic series, long exposures, and timelapses. My last series - not published yet - are about plane photography.",
     "link": "https://www.instagram.com/_Marin2705_/",
     "skills":[
         "Photography", "Timelapse", "Photoshop"

@@ -49,7 +49,8 @@ function revealDetails(d = null){
     let scrollContainer = document.getElementById('scrollContainer');
     if (!scrollContainer.classList.contains('overflow-x-hidden')){
       scrollContainer.classList.add('overflow-x-hidden')
-      scrollContainer.scrollTop = 0;
+      scrollContainer.classList.add('overflow-y-visible')
+      scrollContainer.classList.remove('overflow-y-hidden')
       details.animate([
         { left: '100%' }
       ], {
@@ -60,7 +61,9 @@ function revealDetails(d = null){
       }, duration);
     } else {
       scrollContainer.classList.remove('overflow-x-hidden')
-      details.style.top = scrollContainer.scrollTop;
+      scrollContainer.classList.remove('overflow-y-visible')
+      scrollContainer.classList.add('overflow-y-hidden')
+      details.style.top = scrollContainer.scrollTop + 'px';
       details.animate([
         { left: '0' }
       ], {
@@ -90,16 +93,19 @@ function revealDetails(d = null){
       
       console.log('SCROLLTO LEFT');
 
-      let scrollIntervalLeft = setInterval(() => {
-        (scrollContainer.scrollLeft <= (offset/3)) ? (scrollContainer.scrollLeft -= 15) : (scrollContainer.scrollLeft -= 25);
-        scrollContainer.scrollLeft <= 0 && clearInterval(scrollIntervalLeft);
-      }, 5);
-
-      // scrollContainer.scrollTo({
-      //   left: 0,
-      //   behavior: 'smooth'
-      // });
+      if (noScrollCompatibility) {
+        let scrollIntervalLeft = setInterval(() => {
+          (scrollContainer.scrollLeft <= (offset/3)) ? (scrollContainer.scrollLeft -= 15) : (scrollContainer.scrollLeft -= 25);
+          scrollContainer.scrollLeft <= 0 && clearInterval(scrollIntervalLeft);
+        }, 5);
+      } else {
+        scrollContainer.scrollTo({
+          left: 0,
+          behavior: 'smooth'
+        });
+      }
     }
+
     function doScrollRight(){
       arrowProject.style.opacity = 0;
       arrowProject.classList.add('cursor-pointer');
@@ -114,17 +120,18 @@ function revealDetails(d = null){
 
       console.log('SCROLLTO RIGHT');
 
-      let scrollIntervalRight = setInterval(() => {
-        (scrollContainer.scrollLeft >= 2*(offset/3)) ? (scrollContainer.scrollLeft += 15) : (scrollContainer.scrollLeft += 25);
-        scrollContainer.scrollLeft >= offset && clearInterval(scrollIntervalRight);
-      }, 5);
+      if (noScrollCompatibility){
+        let scrollIntervalRight = setInterval(() => {
+          (scrollContainer.scrollLeft >= 2*(offset/3)) ? (scrollContainer.scrollLeft += 15) : (scrollContainer.scrollLeft += 25);
+          scrollContainer.scrollLeft >= offset && clearInterval(scrollIntervalRight);
+        }, 5);
+      } else {
+        scrollContainer.scrollTo({
+          left: offset,
+          behavior: 'smooth'
+        });
+      }
 
-
-
-      // scrollContainer.scrollTo({
-      //   left: offset,
-      //   behavior: 'smooth'
-      // });
     }
   
     if (d){
@@ -295,8 +302,8 @@ function projectScroll(e){
       e.preventDefault();
     }
   } else {
-    if (deltaX >= 1 || deltaX <= -1){
-      // console.log('MOUSE');
+    if (deltaX > 2 || deltaX < -2){
+      // console.log('MOUSE ', deltaX);
       e.preventDefault();
     }
   }
@@ -867,27 +874,14 @@ function Projects() {
         >
           <path d="M43 17C44.1046 17 45 16.1046 45 15C45 13.8954 44.1046 13 43 13V17ZM0.585786 13.5858C-0.195262 14.3668 -0.195262 15.6332 0.585786 16.4142L13.3137 29.1421C14.0948 29.9232 15.3611 29.9232 16.1421 29.1421C16.9232 28.3611 16.9232 27.0948 16.1421 26.3137L4.82843 15L16.1421 3.68629C16.9232 2.90524 16.9232 1.63891 16.1421 0.857864C15.3611 0.0768158 14.0948 0.0768158 13.3137 0.857864L0.585786 13.5858ZM43 13L2 13V17L43 17V13Z" fill="black"/>
         </svg>
-        <p className="pl-10 pt-10 lg:pt-0 z-10 relative text-3xl order-1 lg:text-[2rem]" 
-        // onClick={() => scrollProject()}
-        ><a href="#root" id='category'>Programming</a></p>
+        <p className="pl-10 pt-10 lg:pt-0 z-10 relative text-3xl order-1 lg:text-[2rem]" id='category'>Programming</p>
 
         <div className="flex flex-col 460:block items-center cursor-pointer z-10 text-1xl lg:absolute bottom-[100px] w-full font-medium text-center order-3 mb-5">
           
-          <div className="flex 460:inline-block">
-            <a href="#root" onClick={() => scrollProject(0)} className='w-fit inline-block m-3 btn'>Previous project</a><a
-            
-             href="#root" onClick={() => scrollProject(1)} className='w-fit inline-block m-3 a btn'>Next project</a>
+          <div className="inline-block 460:flex m-auto justify-between w-full max-w-[400px]">
+            <a href="#root" onClick={() => scrollProject(0)} className='bg-white block m-auto w-fit mb-2 460:inline-block 460:m-3 460:ml-0 border-2 border-solid border-black p-2 460:w-2/5 transition-all hover:bg-black hover:text-white transform hover:scale-110'>Previous project</a>
+            <a href="#root" onClick={() => scrollProject(1)} className='bg-white block m-auto w-fit 460:inline-block 460:m-3 460:mr-0 border-2 border-solid border-black p-2 460:w-2/5 transition-all hover:bg-black hover:text-white transform hover:scale-110'>Next project</a>
           </div>
-          
-          {/* <a 
-          
-          href="#root" onClick={() => {
-            revealDetails();
-            if (!mobileScroll){
-              let learnMoreBtn = document.getElementById('learnMoreBtn');
-              learnMoreBtn.textContent = learnMoreBtn.textContent == 'Go back' ? 'Learn more' : 'Go back';
-            }            
-            }} className='w-fit inline-block m-3 btn' id='learnMoreBtn'>Learn more</a> */}
         </div>
 
         <div className="projectContainer order-2" id="projectContainerScroll">

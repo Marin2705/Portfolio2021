@@ -7,3 +7,163 @@
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+.launcher{
+  background-color: rgba(253, 186, 116, 1);
+  animation: opacity 0.3s cubic-bezier(.7,.01,.34,.99) forwards 2.3s;
+}
+
+@keyframes opacity{
+  to {
+    background-color: rgba(253, 186, 116, 0);
+  }
+}
+
+.launcherRight{
+  clip-path: inset(0 0 0 50%);
+  position: absolute;
+  top: 0;
+  /* left: 50%; */
+  /* transform: translateX(45.65vw); */
+  animation: goRight 0.5s cubic-bezier(.7,.01,.34,.99) forwards 2.8s;
+}
+.launcherLeft{
+  animation: goLeft 0.5s cubic-bezier(.7,.01,.34,.99) forwards 2.8s;
+}
+
+@keyframes goLeft{
+  to {
+    transform: translateX(-100%);
+  }
+}
+@keyframes goRight{
+  to {
+    transform: translateX(50%);
+  }
+}
+
+.svgContainer{
+  transform-origin: center;
+  animation: rotate 0.5s cubic-bezier(.7,.01,.34,.99) forwards 1.8s;
+}
+
+.svgLauncher{
+  overflow: visible;
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  width: 92vw;
+  animation: fill 0.3s ease-in-out forwards 3s;
+  animation: width 0.5s cubic-bezier(.7,.01,.34,.99) forwards 1.9s;
+}
+
+.svgLauncher path:nth-child(1){
+  stroke-dasharray: 400px;
+  stroke-dashoffset: 400px;
+  animation: offset 3s forwards;
+}
+
+.svgLauncher path:nth-child(2){
+  transform: translateY(-100%);
+  animation: reveal 0.3s both 1.5s;
+}
+.svgLauncher path:nth-child(3){
+  transform: translateY(100%);
+  animation: reveal 0.3s both 1.5s;
+}
+
+
+.svgLauncher path:nth-child(4){
+  transform: translateY(-200%);
+  animation: reveal 0.3s both 1.6s;
+}
+.svgLauncher path:nth-child(5){
+  transform: translateY(200%);
+  animation: reveal 0.3s both 1.6s;
+}
+
+.svgLauncher path:nth-child(6){
+  transform: translateY(-200%);
+  animation: reveal 0.3s both 1.7s;
+}
+.svgLauncher path:nth-child(7){
+  transform: translateY(200%);
+  animation: reveal 0.3s both 1.7s;
+}
+
+.svgLauncher path:nth-child(8){
+  transform: translateY(-300%);
+  animation: reveal 0.3s both 1.8s;
+}
+.svgLauncher path:nth-child(9){
+  transform: translateY(300%);
+  animation: reveal 0.3s both 1.8s;
+}
+
+/* 
+.svgLauncher path:nth-child(10){
+  transform: translateY(-400%);
+  animation: reveal 0.3s both 2.4s;
+}
+.svgLauncher path:nth-child(11){
+  transform: translateY(400%);
+  animation: reveal 0.3s both 2.4s;
+}
+
+.svgLauncher path:nth-child(12){
+  transform: translateY(-500%);
+  animation: reveal 0.3s both 2.5s;
+}
+.svgLauncher path:nth-child(13){
+  transform: translateY(500%);
+  animation: reveal 0.3s both 2.5s;
+}
+
+.svgLauncher path:nth-child(14){
+  transform: translateY(-600%);
+  animation: reveal 0.3s both 2.6s;
+}
+.svgLauncher path:nth-child(15){
+  transform: translateY(600%);
+  animation: reveal 0.3s both 2.6s;
+}
+
+.svgLauncher path:nth-child(16){
+  transform: translateY(-600%);
+  animation: reveal 0.3s both 2.7s;
+}
+.svgLauncher path:nth-child(17){
+  transform: translateY(600%);
+  animation: reveal 0.3s both 2.7s;
+} */
+
+@keyframes offset {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(-90deg);
+  }
+}
+
+@keyframes width {
+  to {
+    width: 200vw;
+  }
+}

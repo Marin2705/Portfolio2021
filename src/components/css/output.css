@@ -7,15 +7,15 @@
   .projectContainer {
     @apply w-full lg:max-h-screen pt-7 relative overflow-y-hidden lg:overflow-y-auto lg:h-full lg:absolute lg:top-0 flex pl-10 lg:block lg:ml-0; }
   .projectElem {
-    @apply transition ease-in-out duration-300 mb-10 w-3/4 h-full mr-[20%] lg:mr-0 lg:h-full lg:absolute lg:w-full flex justify-center items-center; }
+    @apply transition ease-in-out duration-300 w-3/4 h-full mr-[20%] lg:mr-0 lg:h-full lg:absolute lg:w-full flex justify-center items-center; }
   .projectFig {
-    @apply cursor-pointer max-w-[400px] max-h-full mb-5; }
+    @apply max-w-[400px] max-h-full mb-5; }
   .projectFig img {
     @apply rounded-3xl drop-shadow-lg w-[75vw] max-w-[400px] h-auto max-h-[300px] lg:h-[300px] lg:w-[400px] object-cover aspect-[4/3]; }
   .projectFig figcaption {
     @apply mt-4 lg:mt-8 text-3xl font-light; }
   .btn {
-    @apply bg-[#C5CDD4] pl-4 pr-4  rounded-3xl p-2 inline-block; }
+    @apply bg-[#C5CDD4] pl-4 pr-4  rounded-3xl p-2 inline-block transition-all transform hover:scale-110; }
   .btn-alignLeft {
     @apply mr-4 mt-4; }
   .clip-circle {
