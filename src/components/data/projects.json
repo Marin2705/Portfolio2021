@@ -16,7 +16,7 @@
     "picAlt": ""
 },{
     "category": "0",
-    "thumb": "portfolioMockup.jpg",
+    "thumb": "portfolio.png",
     "thumbAlt": "",
     "thumbCaption": "Portfolio",
     "title": "Showcase my work and reveal my projects",
@@ -32,7 +32,7 @@
     "picAlt": ""
 },{
     "category": "0",
-    "thumb": "cv.jpg",
+    "thumb": "cvhome.jpg",
     "thumbAlt": "",
     "thumbCaption": "Interactive CV",
     "title": "Show my academic and professional career",
@@ -91,7 +91,7 @@
         "PHP",
         "jQuery"
     ],
-    "pic": "dev.png",
+    "pic": "dev.jpg",
     "picAlt": ""
 },{
     "category": "1",
@@ -137,7 +137,7 @@
     "picAlt": ""
 },{
     "category": "1",
-    "thumb": "desktop.png",
+    "thumb": "desktop.jpg",
     "thumbAlt": "",
     "thumbCaption": "Video CV",
     "title": "I made an original video CV to introduce myself",
@@ -147,7 +147,7 @@
     "skills":[
         "Premiere Pro", "After Effects"
     ],
-    "pic": "filming.png",
+    "pic": "filming.jpg",
     "picAlt": ""
 },{
     "category": "1",
@@ -165,7 +165,7 @@
     "picAlt": ""
 },{
     "category": "1",
-    "thumb": "ny.png",
+    "thumb": "ny.jpg",
     "thumbAlt": "",
     "thumbCaption": "Photography",
     "title": "Nature and architecture photography",

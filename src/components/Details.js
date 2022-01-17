@@ -1,3 +1,5 @@
+import Picture from './Picture';
+
 function Details(props) {
   const opacity = {
     opacity: 1
@@ -28,10 +30,11 @@ function Details(props) {
         </div>
 
         <figure className={projectFigClass}>
-          <img src={props.pic} alt={props.picAlt} className="mb-10 w-full" />
+          <Picture src={props.pic} alt={props.picAlt} className="mb-10 w-full"/>
+          {/* <img src={props.pic} alt={props.picAlt} className="mb-10 w-full" /> */}
           {
               props.link && (
-                <a href={props.link} target="_blank" className='btn'>Go to projet</a>
+                <a rel="noopener" href={props.link} target="_blank" className='btn'>Go to projet</a>
               )           
           }
         </figure>

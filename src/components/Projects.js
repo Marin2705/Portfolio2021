@@ -17,13 +17,13 @@ console.log('no scroll compatibility ? ', noScrollCompatibility);
 
 // this function looks for the picture in the /assets repertory
 // if no picture is found, it returns an empty string
-function findPic(urlInAssets){
-  try {
-    return require('./assets/' + urlInAssets);
-  } catch {
-    return "";
-  }
-}
+// function findPic(urlInAssets){
+//   try {
+//     return require('./assets/' + urlInAssets);
+//   } catch {
+//     return "";
+//   }
+// }
 
 // mouse scroll
 let mouseScrollTimeout = null;
@@ -879,8 +879,8 @@ function Projects() {
         <div className="flex flex-col 460:block items-center cursor-pointer z-10 text-1xl lg:absolute bottom-[100px] w-full font-medium text-center order-3 mb-5">
           
           <div className="inline-block 460:flex m-auto justify-between w-full max-w-[400px]">
-            <a href="#root" onClick={() => scrollProject(0)} className='bg-white block m-auto w-fit mb-2 460:inline-block 460:m-3 460:ml-0 border-2 border-solid border-black p-2 460:w-2/5 transition-all hover:bg-black hover:text-white transform hover:scale-110'>Previous project</a>
-            <a href="#root" onClick={() => scrollProject(1)} className='bg-white block m-auto w-fit 460:inline-block 460:m-3 460:mr-0 border-2 border-solid border-black p-2 460:w-2/5 transition-all hover:bg-black hover:text-white transform hover:scale-110'>Next project</a>
+            <a href="#root" rel="opener" onClick={() => scrollProject(0)} className='bg-white block m-auto w-fit mb-2 460:inline-block 460:m-3 460:ml-0 border-2 border-solid border-black p-2 460:w-2/5 transition-all hover:bg-black hover:text-white transform hover:scale-110'>Previous project</a>
+            <a href="#root" rel="opener" onClick={() => scrollProject(1)} className='bg-white block m-auto w-fit 460:inline-block 460:m-3 460:mr-0 border-2 border-solid border-black p-2 460:w-2/5 transition-all hover:bg-black hover:text-white transform hover:scale-110'>Next project</a>
           </div>
         </div>
 
@@ -895,7 +895,7 @@ function Projects() {
                   key={i}
                   i={i}
                   class="a"
-                  thumb={findPic(project.thumb)}
+                  thumb={project.thumb}
                   thumbAlt={project.thumbAlt}
                   thumbCaption={project.thumbCaption}
                   text={project.text}
@@ -906,7 +906,7 @@ function Projects() {
         </div>
       </div>
       <Details
-        pic={findPic(projects[lastProject].pic)}
+        pic={projects[lastProject].pic}
         picAlt={projects[lastProject].picAlt}
         title={projects[lastProject].title}
         date={projects[lastProject].date}
