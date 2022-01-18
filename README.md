@@ -1,8 +1,14 @@
 # My portfolio
 
+## Styles
+
+Styles must be edited in /src/index.css or in /styles.scss and compiled to css in /src/components/css/output.css, but never in output.css directly.
+
+## React
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### Available Scripts
 
 In the project directory, you can run:
 
